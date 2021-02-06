@@ -24,7 +24,7 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    getVCard: (root, args, context) => {
+    getVCard: () => {
       return [{}]
     }
   },
