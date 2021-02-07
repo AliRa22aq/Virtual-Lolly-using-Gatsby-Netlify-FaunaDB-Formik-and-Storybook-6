@@ -24,7 +24,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    transition: 0.5s;
+   
+}
+
+.container_lollies:hover {
+    background-color: transparent;
+    transition: 0.5s;
+
 }
 
 .container > button {
@@ -39,5 +46,5 @@
     margin-bottom: 50px;
     margin-top: 50px;
     font-size: 2rem;
-
+    border: 3px solid black;
 }
