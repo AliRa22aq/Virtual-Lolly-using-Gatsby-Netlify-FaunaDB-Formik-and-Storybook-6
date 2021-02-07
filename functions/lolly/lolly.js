@@ -1,51 +1,97 @@
-const { ApolloServer, gql } = require("apollo-server-lambda");
-const faunadb = require('faunadb'),
-  q = faunadb.query;
-const shortid = require('shortid');
+const { HttpLink } = require('@apollo/client');
+const { ApolloServer, gql } = require('apollo-server-lambda')
+
+const faunadb = require("faunadb");
+const q = faunadb.query;
+const shortid = require("shortid");
 
 const typeDefs = gql`
-  type Query {
-    getVCard: [vCard]
+    type Query {
+    hello: String
+    getLollybyLink(link:String!):Lolly
+
   }
-  type vCard {
-    id: ID!
+
+  type Lolly {
+    recipient: String!
+    message: String!
+    sender: String!
     c1: String!
     c2: String!
     c3: String!
-    to: String!
-    from: String!
-    msg: String!
     link: String!
   }
   type Mutation {
-    addVCard(c1: String!, c2: String!, c3: String!, to: String!, from: String!, msg: String!) : vCard
+    createLolly (
+      recipient: String!, 
+      message: String!,
+      sender: String!, 
+      c1: String!,
+      c2: String!,
+      c3: String!) : Lolly
   }
 `
 
+
 const resolvers = {
   Query: {
-    getVCard: () => {
-      return [{}]
-    }
-  },
-  Mutation: {
-    addVCard: async (_, { c1, c2, c3, to, msg, from }) => {
-      var adminClient = new faunadb.Client({ secret: 'fnAEAo3H5NACCMfVfQwTQTU6Eud19BijlajOv0XR' });
+    hello: () => {
+      return 'Hello, Lolly!'
+    },
 
-      console.log(c1, c2, c3, to, msg, from)
-      const result = await adminClient.query(
-        q.Create(
-          q.Collection('vCards'),
-          {
-            data: {
-              c1, c2, c3, to, msg, from,
-              link: shortid.generate()
-            }
-          },
+    getLollybyLink : async (_ , {link}) => {
+      console.log("LOLLY ID : " , HttpLink)
+    try {
+      const client = new faunadb.Client({secret : 'fnAEAo3H5NACCMfVfQwTQTU6Eud19BijlajOv0XR'});
+
+      console.log(`getLolly function invoked`);
+
+      const result = await client.query (
+
+        q.Get(q.Match(q.Index("lolly_by_link") , link ))
+       
         )
-      )
-      return result.data.data
+        console.log(result.data);
+
+        return result.data
+      }
+    
+    catch(err){
+
     }
+  }
+
+
+  },
+  Mutation : {
+    createLolly: async (_, args) => {
+
+        // console.log("args = ",args);
+  try {
+      var client = new faunadb.Client({ secret: 'fnAEAo3H5NACCMfVfQwTQTU6Eud19BijlajOv0XR' });
+      var id = shortid.generate();
+      args.link = id
+
+      const result = await client.query(
+
+
+        // q.Create(q.Ref(q.Collection('lollies'), id), {
+        //      data: args 
+        //   }
+        // )
+
+        q.Create(q.Collection("lollies"), {
+          data: args
+        })
+
+      );
+        
+      console.log('result', result);
+      console.log('result', result.data);
+      return result.data
+    }  catch(err) 
+                  {  console.log(err) }
+    },
   }
 }
 
