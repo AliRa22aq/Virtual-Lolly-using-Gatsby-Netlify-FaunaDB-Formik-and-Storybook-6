@@ -1,27 +1,41 @@
 .container {
-    display: flex;
-    align-items: center;
     align-content: center;
-    border: 3px solid black;
-
+    align-items: center;
+    margin-top: 50px;
 }
-
 
 .container_lolly {
     display: flex;
-    align-items: center;
-    align-content: center;
-    border: 3px solid black;
-    justify-content: space-between;
+    justify-content: space-around;
+}
 
-
+.container_lolly_input {
+    display: flex;
+    flex-direction: column;
+    vertical-align: middle;
+    align-self: center;
+    position: relative;
+    left: -100px
 }
 
 
 .container_form {
-    display: block;
-    align-items: center;
-    align-content: space-between;
-    border: 3px solid black;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(236, 243, 230);
+}
+
+input[type="color"] {
+    position: relative;
+    overflow: hidden;
+    width: 60px;
+    height: 60px;
+    border-radius: 10%;
+}
+
+.container_form > button {
+
+    margin-top: 500px;
 
 }
+

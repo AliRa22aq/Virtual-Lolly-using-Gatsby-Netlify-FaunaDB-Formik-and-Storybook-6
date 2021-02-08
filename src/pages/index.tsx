@@ -15,15 +15,15 @@ export default function Home() {
 
       <div className="container_lollies">
 
-        <div>
-          <Lolly top="red" middle="green" bottom="blue"  />
-        </div>
-        <div>
-          <Lolly top="pink" middle="yellow" bottom="black"  />
-        </div>  
-        <div>
-          <Lolly top="green" middle="green" bottom="red"  />
-        </div>  
+                    <div>
+                      <Lolly top="red" middle="green" bottom="blue"  />
+                    </div>
+                    <div>
+                      <Lolly top="pink" middle="yellow" bottom="black"  />
+                    </div>  
+                    <div>
+                      <Lolly top="green" middle="green" bottom="red"  />
+                    </div>  
 
       </div>
       

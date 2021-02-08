@@ -66,9 +66,10 @@ const resolvers = {
   Mutation : {
     createLolly: async (_, args) => {
 
-        // console.log("args = ",args);
+         console.log("args = ",args);
   try {
       var client = new faunadb.Client({ secret: 'fnAEAo3H5NACCMfVfQwTQTU6Eud19BijlajOv0XR' });
+      console.log(args)
       var id = shortid.generate();
       args.link = id
 
@@ -90,7 +91,7 @@ const resolvers = {
       console.log('result', result.data);
       return result.data
     }  catch(err) 
-                  {  console.log(err) }
+                    {console.log(err) }
     },
   }
 }
