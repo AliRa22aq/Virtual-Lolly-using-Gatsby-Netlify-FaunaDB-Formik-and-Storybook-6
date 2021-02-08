@@ -3,8 +3,6 @@
     margin-left: 50%;
 }
 
-
-
 .container {
     align-content: center;
     align-items: center;
@@ -12,9 +10,7 @@
 }
 
 .container_lolly {
-
     margin: auto;
-
 }
 
 
@@ -35,12 +31,6 @@ input[type="text"] {
     margin-bottom: 20px;
     margin-top: 50px;
 }
-
-/* .container_request > button{
-    width: 100%;
-    background-color: red;
-    color: rgb(253, 253, 253);
-} */
 
 .container_request > button {
     background-color: rgb(250, 75, 75);

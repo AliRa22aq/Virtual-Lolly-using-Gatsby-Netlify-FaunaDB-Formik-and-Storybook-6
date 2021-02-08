@@ -39,59 +39,50 @@ const resolvers = {
       return 'Hello, Lolly!'
     },
 
-    getLollybyLink : async (_ , {link}) => {
-      console.log("LOLLY ID : " , HttpLink)
-    try {
-      const client = new faunadb.Client({secret : 'fnAEAo3H5NACCMfVfQwTQTU6Eud19BijlajOv0XR'});
+    getLollybyLink: async (_, { link }) => {
+      console.log("LOLLY ID : ", HttpLink)
+      try {
+        const client = new faunadb.Client({ secret: 'fnAEAo3H5NACCMfVfQwTQTU6Eud19BijlajOv0XR' });
 
-      console.log(`getLolly function invoked`);
-
-      const result = await client.query (
-
-        q.Get(q.Match(q.Index("lolly_by_link") , link ))
-       
+        const result = await client.query(
+          q.Get(q.Match(q.Index("lolly_by_link"), link))
         )
-        console.log(result.data);
-
         return result.data
       }
-    
-    catch(err){
 
+      catch (err) {
+
+      }
     }
-  }
 
 
   },
-  Mutation : {
+  Mutation: {
     createLolly: async (_, args) => {
 
-         console.log("args = ",args);
-  try {
-      var client = new faunadb.Client({ secret: 'fnAEAo3H5NACCMfVfQwTQTU6Eud19BijlajOv0XR' });
-      console.log(args)
-      var id = shortid.generate();
-      args.link = id
+      console.log("args = ", args);
+      try {
+        var client = new faunadb.Client({ secret: 'fnAEAo3H5NACCMfVfQwTQTU6Eud19BijlajOv0XR' });
+        console.log(args)
+        var id = shortid.generate();
+        args.link = id
 
-      const result = await client.query(
+        const result = await client.query(
 
 
-        // q.Create(q.Ref(q.Collection('lollies'), id), {
-        //      data: args 
-        //   }
-        // )
+          // q.Create(q.Ref(q.Collection('lollies'), id), {
+          //      data: args 
+          //   }
+          // )
 
-        q.Create(q.Collection("lollies"), {
-          data: args
-        })
+          q.Create(q.Collection("lollies"), {
+            data: args
+          })
 
-      );
-        
-      console.log('result', result);
-      console.log('result', result.data);
-      return result.data
-    }  catch(err) 
-                    {console.log(err) }
+        );
+        console.log('result', result.data);
+        return result.data
+      } catch (err) { console.log(err) }
     },
   }
 }

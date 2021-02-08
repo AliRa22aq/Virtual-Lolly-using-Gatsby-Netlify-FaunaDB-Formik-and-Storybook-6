@@ -22,7 +22,7 @@
 .container_form {
     display: flex;
     flex-direction: column;
-    background-color: rgb(236, 243, 230);
+    /* background-color: rgb(236, 243, 230); */
 }
 
 input[type="color"] {
